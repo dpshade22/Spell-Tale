@@ -12,6 +12,7 @@ public class GameBoard : MonoBehaviour
     {
         createGameBoard();
     }
+    
 
     // Update is called once per frame
     void Update()

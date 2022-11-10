@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Space : MonoBehaviour
 {
+    [SerializeField] Sprite[] sprites; // should be in alphabetical order
+
     public enum Type {Empty,}
     public int x;
     public int y;
