@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GameBoard : MonoBehaviour
 {
+    public Sprite[] sprites;
     public Space spacePrefab;
     public int width, height;
 
     // Start is called before the first frame update
     void Start()
     {
+        name = "GameBoard";
         createGameBoard();
     }
     
@@ -27,6 +29,15 @@ public class GameBoard : MonoBehaviour
                 space.x = i;
                 space.y = j;
                 space.name = "Space (" + i + ", " + j + ")";
+            }
+        }
+    }
+
+    // json is currently in the format "001111/111100/001111/111100/001111/111100/001111"
+    void loadBoard(string json) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+
             }
         }
     }

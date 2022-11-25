@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class Space : MonoBehaviour
 {
-    [SerializeField] Sprite[] sprites; // should be in alphabetical order
-
-    public enum Type {Empty,}
+    private SpriteRenderer spriteRenderer;
+    public enum Type {Empty,Home,DoubleLetter,TripleLetter,QuadrupleLetter}
     public int x;
     public int y;
     public Type type;
+    private Type prevType; // used to only update type when changed
 
     // Start is called before the first frame update
     void Start()
     {
-        type = Type.Empty;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        type = Type.Empty; // default as Empty
+        prevType = Type.Home; // set differently from default so that sprite is initially set in Update
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (type != prevType) { // only update type when changed
+            prevType = type;
+            var board = GameObject.Find("GameBoard"); // gets the gameobject
+            var boardAsGameBoard = board.GetComponent<GameBoard>(); // gets the gameobject in the correct format (GameBoard object)
+            spriteRenderer.sprite = boardAsGameBoard.sprites[(int)type]; // updates this space's sprite
+        }
     }
+
 }
