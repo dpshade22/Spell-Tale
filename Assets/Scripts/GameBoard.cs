@@ -7,6 +7,7 @@ public class GameBoard : MonoBehaviour
     public Sprite[] sprites;
     public Space spacePrefab;
     public int width, height;
+    [System.NonSerialized] public Space[] spaces;
 
     // Start is called before the first frame update
     void Start()
@@ -22,23 +23,24 @@ public class GameBoard : MonoBehaviour
         
     }
 
-    void createGameBoard() {
+    public void createGameBoard() {
+        spaces = new Space[width * height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 var space = Instantiate(spacePrefab, transform.position + new Vector3(i, j, 0), Quaternion.identity);
                 space.x = i;
                 space.y = j;
                 space.name = "Space (" + i + ", " + j + ")";
+                spaces[j * width + i] = space;
             }
         }
     }
 
-    // json is currently in the format "001111/111100/001111/111100/001111/111100/001111"
-    void loadBoard(string json) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-
-            }
+    public void deleteSpaces() {
+        for (int i = 0; i < spaces.Length; i++) {
+            Destroy(spaces[i]);
         }
     }
+
+
 }

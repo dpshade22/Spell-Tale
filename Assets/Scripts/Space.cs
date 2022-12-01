@@ -15,13 +15,13 @@ public class Space : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        type = Type.Empty; // default as Empty
-        prevType = Type.Home; // set differently from default so that sprite is initially set in Update
+        prevType = (Type)((int)type + 1); // set differently from default so that sprite is initially set in Update
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (type != prevType) { // only update type when changed
             prevType = type;
             var board = GameObject.Find("GameBoard"); // gets the gameobject
@@ -30,4 +30,8 @@ public class Space : MonoBehaviour
         }
     }
 
+    public void setTypeNum(int typeNum) {
+        type = (Type)typeNum;
+        Update();
+    }
 }
